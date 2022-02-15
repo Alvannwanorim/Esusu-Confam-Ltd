@@ -8,7 +8,7 @@ const {
   updateUser,
   deleteUser,
   createAdminUser,
-} = require("../controllers/usercontrollers.js");
+} = require("../controllers/userControllers.js");
 const { auth, superAdminUser } = require("../middlewares/auth");
 const router = express.Router();
 
