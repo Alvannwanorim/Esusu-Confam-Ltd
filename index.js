@@ -15,7 +15,7 @@ app.use(morgan("dev"));
 
 ///routes
 app.get("/", (req, res) => {
-  res.send("<h1>WELCOME TO ESUSU CONFAM API/h1>");
+  res.send("<h1>WELCOME TO ESUSU CONFAM API</h1>");
 });
 
 // User routes
