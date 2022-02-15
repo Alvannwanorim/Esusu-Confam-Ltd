@@ -1,12 +1,12 @@
 const express = require("express");
-const dotenv = require('dotenv')
-const morgan = require('morgan')
+const dotenv = require("dotenv");
+const morgan = require("morgan");
 dotenv.config();
 
-const userRouter = require('./src/routes/userRoutes.js')
+const userRouter = require("./src/routes/userRoutes.js");
 
-// const groupRouter = require('./src/routes/groupRoutes')
-const connectDB = require('./src/database')
+const groupRouter = require("./src/routes/groupRoutes");
+const connectDB = require("./src/database");
 
 const app = express();
 //Middlewares
@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
 
 // User routes
 app.use("/api/users/auth", userRouter);
-// app.use("/api/groups", groupRouter);
+app.use("/api/groups", groupRouter);
 
 //connect to Database
 connectDB();
