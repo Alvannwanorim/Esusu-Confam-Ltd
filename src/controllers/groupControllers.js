@@ -57,8 +57,17 @@ exports.createGroup = async (req, res) => {
 //access Public
 
 exports.getGroups = async (req, res) => {
+
+    const keyword = req.query.keyword
+        ? {
+            name: {
+                $regex: req.query.keyword,
+                $options: "i",
+            },
+        }
+        : {};
     try {
-        const groups = await Group.find()
+        const groups = await Group.find({ ...keyword })
         if (!groups) {
             return res.status(404).json({
                 statusCode: 404,
