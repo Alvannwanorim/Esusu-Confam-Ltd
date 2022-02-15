@@ -3,7 +3,7 @@ const dotenv = require('dotenv')
 const morgan = require('morgan')
 dotenv.config();
 
-// const userRouter = require('./src/routes/userRoutes')
+const userRouter = require('./src/routes/userRoutes.js')
 
 // const groupRouter = require('./src/routes/groupRoutes')
 const connectDB = require('./src/database')
@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
 });
 
 // User routes
-// app.use("/api/users/auth", userRouter);
+app.use("/api/users/auth", userRouter);
 // app.use("/api/groups", groupRouter);
 
 //connect to Database
