@@ -3,9 +3,9 @@ const dotenv = require('dotenv')
 const morgan = require('morgan')
 dotenv.config();
 
-const userRouter = require('./routes/userRoutes')
-const groupRouter = require('./routes/groupRoutes')
-const connectDB = require('./database')
+const userRouter = require('./src/routes/userRoutes')
+const groupRouter = require('./src/routes/groupRoutes')
+const connectDB = require('./src/database')
 
 const app = express();
 
