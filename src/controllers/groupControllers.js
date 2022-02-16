@@ -4,7 +4,7 @@ const { validationResult } = require("express-validator");
 
 //@desc CREATE GROUP
 //@route POST: /api/group/create
-//access Public
+//access PRIVATE
 
 exports.createGroup = async (req, res) => {
     const { name, description, maxCapacity, savingsAmount } = req.body;
@@ -53,11 +53,12 @@ exports.createGroup = async (req, res) => {
 // Get Groups
 
 //@desc GET ALL GROUPS
-//@route POST: /api/group/create
-//access Public
+//@route GET: /api/group/
+//access PRIVATE
 
 exports.getGroups = async (req, res) => {
 
+    //Search parameters
     const keyword = req.query.keyword
         ? {
             name: {
@@ -89,7 +90,7 @@ exports.getGroups = async (req, res) => {
 
 
 //@desc GET ALL GROUPS
-//@route POST: /api/group/create
+//@route GET: /api/group/:groupid
 //access Public
 
 exports.getGroupById = async (req, res) => {
@@ -118,8 +119,8 @@ exports.getGroupById = async (req, res) => {
 };
 
 //@desc GET List Of Users
-//@route POST: /api/group/create
-//access Public
+//@route GET: /api/group/users
+//access PRIVATE
 exports.getAllGroupUsers = async (req, res) => {
     const groupId = req.params.id
     try {
@@ -143,9 +144,9 @@ exports.getAllGroupUsers = async (req, res) => {
     }
 }
 // Add User to Group
-//@desc GET ALL GROUPS
-//@route POST: /api/group/:groupId
-//access Public
+//@desc ADD USERS TO GROUP
+//@route PUT: /api/group/:groupId
+//access PRIVATE
 
 exports.addUserToGroup = async (req, res) => {
     const groupId = req.params.id
@@ -195,9 +196,9 @@ exports.addUserToGroup = async (req, res) => {
     }
 };
 // Add User to Group By Admin
-//@desc GET ALL GROUPS
-//@route POST: /api/group/:groupId
-//access Public
+//@desc ADD USERS TO THE GROUP BY ADMIN
+//@route PUT: /api/group/:groupId/:userId
+//access PRIVATE
 
 exports.addUserToGroupByAdmin = async (req, res) => {
     const groupId = req.params.groupId
@@ -248,9 +249,9 @@ exports.addUserToGroupByAdmin = async (req, res) => {
 };
 
 // Remove User From Group
-//@desc GET ALL GROUPS
-//@route POST: /api/group/:groupId
-//access Public
+//@desc REMOVE USER FROM GROUP
+//@route PUT: /api/group/:groupId/:userId
+//access PRIVATE
 
 exports.removeUserFromGroup = async (req, res) => {
     const groupId = req.params.id
@@ -300,9 +301,8 @@ exports.removeUserFromGroup = async (req, res) => {
     }
 };
 
-// delet group
-//@desc GET ALL GROUPS
-//@route POST: /api/group/create
+//@desc DELETE GROUP
+//@route DELETE: /api/group/:groupid
 //access Public
 
 exports.deleteGroups = async (req, res) => {

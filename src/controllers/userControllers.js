@@ -32,6 +32,8 @@ exports.registerUser = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
+
+    //create new user recors
     const newUser = new User({
       fullname,
       location,
@@ -44,6 +46,7 @@ exports.registerUser = async (req, res) => {
     await newUser.save();
 
 
+    //return user information to client 
     res.status(201).json({
       statusCode: 201,
       user: {
@@ -53,6 +56,7 @@ exports.registerUser = async (req, res) => {
       },
     });
   } catch (err) {
+    //log and return error when request fails 
     console.log(err);
     res.status(500).json({
       statusCode: 500,
@@ -72,7 +76,7 @@ exports.loginUser = async (req, res) => {
     //check if user exists
     const user = await User.findOne({ email });
 
-    //if user does not exist
+    //if user does not exist return error message to client 
     if (!user) {
       return res.status(400).json({
         statusCode: 400,
@@ -90,6 +94,7 @@ exports.loginUser = async (req, res) => {
       });
     }
 
+    // jwt payload 
     const payload = {
       user: {
         name: user.fullname,
@@ -101,6 +106,7 @@ exports.loginUser = async (req, res) => {
       expiresIn: "1d",
     });
 
+    //return signin token to client
     res.status(200).json({
       statusCode: 200,
       token,
@@ -174,7 +180,7 @@ exports.getUserById = async (req, res) => {
 
 
 //@desc CREATE ADMIN
-//@route /api/users/auth/admin:id
+//@route /api/users/auth/:adminId
 //access Private
 
 exports.createAdminUser = async (req, res) => {
@@ -211,7 +217,9 @@ exports.createAdminUser = async (req, res) => {
   }
 };
 
-
+//@desc DELETE USER
+//@route /api/users/auth/:userId
+//access Private
 exports.deleteUser = async (req, res) => {
   const userId = req.user.id;
 
